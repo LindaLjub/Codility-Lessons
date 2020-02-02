@@ -1,29 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Solution
+    class Lesson1
     {
         // ---------- Lesson 1
-        // SOLUTION 1
+        // SOLUTION 1, lesson 1 (Not optimal)
         public int solution(int N)
         {
 
-            // gör om int till binary
+            // int to binary
             int b = 2;
             string binaryForm = Convert.ToString(N, b);
 
-            // debug
+            // debug, see if its binary
             Console.WriteLine(binaryForm);
 
-            // splitta till en array
+            // split to array
             var charArray = binaryForm.ToCharArray();
 
-            // hitta största binary gap av 0:or
+            // find longest "binary gap" of zeros
             int lengthOfArray = charArray.Length - 1;
 
             // debug
@@ -34,106 +30,103 @@ namespace ConsoleApp1
 
             for (int i = 0; i < lengthOfArray; i++)
             {
+                // search for zeros
                 if (charArray[i] == '0')
                 {
                     count++;
 
+                    // as long as the index +1 is a zero
                     while (charArray[i + 1] == '0')
                     {
                         count++;
                         i++;
 
+                        // to avoid errors if the last number is a zero
                         if (i >= lengthOfArray)
                         {
-                            Console.WriteLine("nu");
                             countTemp = 0;
                             count = 0;
                             break;
-
-
                         }
                     }
 
                 }
 
+                // if this "binary gap" is longer then the last one
+                // To make sure we are finding the longest gap
                 if (count > countTemp)
                 {
                     countTemp = count;
                 }
 
+                // reset after each int, go to the next one
                 count = 0;
-
             }
 
+            // debug
             Console.WriteLine(countTemp);
 
-            // returnera antal 0:or i största binary gap
-
+            // return the number of zeros in the longest binary gap
             return countTemp;
         }
 
-        // SOLUTION 2
+        // SOLUTION 2, lesson 1 (Best solution)
         public int solution_two(int N)
         {
-
-            // gör om int till binary
+            // int to binary
             int b = 2;
             string binaryForm = Convert.ToString(N, b);
 
-            // debug
-            Console.WriteLine("Binärtal: " + binaryForm);
+            // debug, see if its binary
+            Console.WriteLine("Binary: " + binaryForm);
 
-            // splitta till en array
+            // split to array
             var charArray = binaryForm.ToCharArray();
 
-            // hitta största binary gap av 0:or
+            // find longest "binary gap" of zeros
             int lengthOfArray = charArray.Length;
 
             // debug
-            Console.WriteLine("längd array: " + lengthOfArray);
+            Console.WriteLine("length of array: " + lengthOfArray);
 
             int indexTemp = 0;
             int count = 0;
             int countTemp = 0;
 
-            // hitta 1:or, räkna mellanrum
+            // find 1:s, find the longest gap
             for (int i = 0; i < lengthOfArray; i++)
             {
-                // hittar första 1:an
+                // finds the first 1
                 int index1 = Array.FindIndex(charArray, item => item == '1');
 
                 // debug
-                Console.WriteLine("Första 1:an: " + index1);
+                Console.WriteLine("first 1: " + index1);
 
+                // if is exists a 1
                 if (index1 >= 0)
                 {
-                    // byt ut 1:an
+                    // switch the 1 to an X so I dont find the same one again.
                     charArray[index1] = 'X';
 
+                    // calculate how long the gap is
                     count = (index1 - indexTemp) - 1;
                     indexTemp = index1;
 
+                    // if this "binary gap" is longer then the last one
+                    // To make sure we are finding the longest gap
                     if (count > countTemp)
                     {
                         countTemp = count;
                     }
                 }
-
-
             }
 
             // debug
             Console.WriteLine("COUNT: " + countTemp);
 
-            // return gap
+            // return the number of zeros in the longest binary gap
             return countTemp;
 
         }
-
-        // ---------- Lesson 2
-
-
-
-
     }
 }
