@@ -4,7 +4,6 @@ namespace ConsoleApp1
 {
     class Lesson2
     {
-        // ---------- Lesson 2
         // SOLUTION Lesson 2.1
         public int[] solution(int[] A, int K)
         {
@@ -61,5 +60,73 @@ namespace ConsoleApp1
 
         }
 
+        // SOLUTION Lesson 2.2
+        public int solution2(int[] A)
+        {
+            // Check that array is not empty
+            if (A.Length != 0)
+            {
+                // Check that is is a odd number of numbers.
+                if (A.Length % 2 != 0)
+                {
+                    // Right answer
+                    int answer = 0;
+
+                    // debug
+                    for (int i = 0; i < A.Length; i++)
+                    {
+                        Console.WriteLine(A[i] + " ");
+                    }
+
+                    // sortera array i nummerordning
+                    Array.Sort(A);
+
+                    // debug
+                    Console.WriteLine("sorted: ");
+                    for (int i = 0; i < A.Length; i++)
+                    {
+                        Console.WriteLine(A[i] + " ");
+                    }
+
+                    // loop, check if number next to index is same (Should be same when sorted)
+                    for (int i = 0; i < A.Length; i++)
+                    {
+                        // last number, must be "unpaired" if reached this index
+                        if (i == (A.Length-1))
+                        {
+                            answer = A[i];
+                            break;
+                        }
+                        else
+                        {
+                            // check is number next to index is the same, if not it is "unpaired"
+                            if (A[i] == A[(i + 1)])
+                            {
+                                // jump 2 steps
+                                i++;
+                            }
+                            else
+                            {
+                                answer = A[i];
+                                break;
+                            }
+                        }
+
+                    }
+
+                    // return the number the thats not in a pair.
+                    return answer;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
     }
 }

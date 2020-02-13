@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace ConsoleApp1
 {
     class Program
@@ -18,6 +19,10 @@ namespace ConsoleApp1
             // int[] array = {};
             // run2.solution(array, 3);
 
+            // Lesson 2.1
+            // int[] array2 = { 3, 3, 4, 4, 6};
+            // int a = run2.solution2(array2);
+            // Console.WriteLine("Svar: " + a);
         }
 
     }
